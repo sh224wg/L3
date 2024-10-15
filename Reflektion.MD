@@ -32,7 +32,20 @@ comments
 extract images && imagedata
 The functions are simple enough that they mostly self-explain their purpose, reducing the need for excessive comments.
 
-## Kapitel 5
+## Kapitel 5 Formatting
+tables method : 
+Structure the code for better readability. in tables and images they are aligned in a narrative structure 
+
+the code as a whole follows a clear narrative to how the methods intertwine 
+
+Reduce Nesting:
+ With smaller functions, the original deeply nested logic is now flattened, which makes it easier to follow.
+
+ Each function has a specific responsibility:
+
+    findTables handles finding and filtering tables.
+    ExtractTableRow focuses on extracting rows from a given table.
+    extracttablecell deals with extracting and trimming text from cells.
 
 ## Kapitel 6  Objects and Data Structures
 
