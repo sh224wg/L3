@@ -1,5 +1,13 @@
 # Reflektion
 
+Scrapenext page
+Single Responsibility (Chapter 3): Each function should do one thing. We can separate out the logic for scraping a single page and handling the process of iterating through pages.
+Meaningful Naming (Chapter 2): Use clear function and variable names.
+Error Handling (Chapter 7): Add appropriate logs to indicate why the scraping might stop.
+Simpler Flow: Use concise and meaningful condition checks.
+
+didnt change too much as i felt that it would make it less logical and add multiple arguemnts which i wanted to avoid
+
 ## Kapitel 2
 - getmetadata changed to extract meta data
 
@@ -7,7 +15,12 @@
 
 - get lists to extractlist
 
- Using names like extractUniqueImages and createImageData makes it clear what each function is responsible for.
+Using names like extractUniqueImages and createImageData makes it clear what each function is responsible for.
+
+Alignment: The code uses clear and descriptive names for variables, functions, and parameters. For example:
+scrapedContent, maxPages, currentUrl clearly describe their purpose.
+Functions like scrapeSinglePage and findNextPage describe what they do.
+Helper functions like #findNextLink, #findNextButton, reflect their roles.
 
 ## Kapitel 3 Functions
 dont repeat yourself 
@@ -24,6 +37,13 @@ extractlistdetails
 extactimages && createImageData
 - By breaking down the image extraction logic into smaller methods, each method does one thing well.
 
+Alignment: The refactoring breaks the code into smaller functions, each with a clear purpose:
+scrapeNextPage manages the loop and controls the scraping process.
+scrapeSinglePage focuses on scraping one page and finding the next page.
+#findNextLink and #findNextButton focus on locating specific elements.
+Where It Could Improve: The functions are concise, but keeping each function as small as possible while ensuring clarity is key. This has largely been achieved here.
+
+
 ## Kapitel 4
 
 comments 
@@ -32,6 +52,8 @@ comments
 extract images && imagedata
 The functions are simple enough that they mostly self-explain their purpose, reducing the need for excessive comments.
 
+Alignment: The code doesn’t rely on comments, which is generally good as it implies that the code is self-explanatory.
+
 ## Kapitel 5 Formatting
 tables method : 
 Structure the code for better readability. in tables and images they are aligned in a narrative structure 
@@ -39,25 +61,51 @@ Structure the code for better readability. in tables and images they are aligned
 the code as a whole follows a clear narrative to how the methods intertwine 
 
 Reduce Nesting:
- With smaller functions, the original deeply nested logic is now flattened, which makes it easier to follow.
+With smaller functions, the original deeply nested logic is now flattened, which makes it easier to follow.
 
- Each function has a specific responsibility:
+Each function has a specific responsibility:
 
-    findTables handles finding and filtering tables.
-    ExtractTableRow focuses on extracting rows from a given table.
-    extracttablecell deals with extracting and trimming text from cells.
+findTables handles finding and filtering tables.
+ExtractTableRow focuses on extracting rows from a given table.
+extracttablecell deals with extracting and trimming text from cells.
+
+Moved retry scraper to top so its closer to scraper because its calls scraper (dependent functions)
+
+Alignment: The code is well-organized and consistently formatted:
+Each function is separated clearly.
+Proper indentation and spacing make the code easy to read.
+Array.from() is used for better readability when working with collections.
+Where It Could Improve: The formatting is already clear and consistent, so the focus should be on maintaining
 
 ## Kapitel 6  Objects and Data Structures
 
 - extract images Structuring the return of createImageData as an object keeps the data organized, making it easier to modify or extend later.
 
+Alignment: The use of an object to pass multiple arguments into scrapeSinglePage keeps related data together, which is a key principle.
+The code uses objects effectively but always good to ensure that the data structures chosen (e.g., arrays for links) match the needs of the function. 
+
 ## Kapitel 7
 - Error handling in scrapewebpage is extracted using const outside class
 - use try catch
 
+Alignment: The code incorporates basic error handling and user feedback through logging:
+Logs are used to indicate why the scraping stops (No content found, No next page found).
+Using a clear message when breaking out of loops helps with understanding the flow during debugging.
+
+
 ## Kapitel 8
 
+Alignment: The code isolates different parts of the logic into helper functions, respecting the boundaries between various tasks:
+scrapeNextPage focuses on controlling the pagination.
+#findNextLink, extractCells and rows focus on finding specific elements.
+
 ## Kapitel 9
+
+Alignment: code structure makes unit testing easier:
+Smaller functions like scrapeSinglePage and #findNextLink can be tested independently.
+By isolating responsibilities, functions can be mocked or tested without reliance on other parts of the code.
+There are no built-in tests. Writing unit tests for each of the helper functions and the scrapeNextPage method would provide more reliability in funcitonality.
+
 
 ## Kapitel 10 Classes
 -  Keeping the list processing logic in a single method could make the code easier to manage within a class context, especially if extractListItems could be reused for other types of list extraction.
@@ -66,4 +114,10 @@ Reduce Nesting:
 
 Use of Set for uniqueness is good and aligns with the “keep it simple” principle.
 
-## Kapitel 11
+Alignment: The code uses methods within a class (this.scrapeWebPage, this.#findNextPage). The methods are organized in a way that respects encapsulation, like using # for private methods (#findNextLink, #findNextButton).
+
+## Kapitel 11 Systems
+
+Alignment: The code is modular, making it easy to change one part without affecting others:
+If the logic for a function or method changes the methods dependant on it can be modified accordingly tex finding the next page changes, #findNextPage can be modified without affecting scrapeNextPage.
+If the scraping mechanism needs to be adjusted, scrapeSinglePage can be updated independently.
