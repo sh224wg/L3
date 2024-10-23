@@ -21,3 +21,7 @@ app.post('/scrape', async (req, res) => {
         const data = await scraper.scrapeWebPage(url) // call scraper
     }
 })
+
+app.listen(port, () => {
+    console.log('Server is running at http://localhost:')
+})
