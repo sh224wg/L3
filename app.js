@@ -14,3 +14,10 @@ app.get('/', (req, res => {
     res.sendFile(__dirname + '/public/index.html')
 }))
 // scraping
+
+app.post('/scrape', async (req, res) => {
+    const { url } = req.body // get URL from form
+    try {
+        const data = await scraper.scrapeWebPage(url) // call scraper
+    }
+})
