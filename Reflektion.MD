@@ -99,12 +99,12 @@ Alignment: The code isolates different parts of the logic into helper functions,
 scrapeNextPage focuses on controlling the pagination.
 #findNextLink, extractCells and rows focus on finding specific elements.
 
-## Kapitel 9
+## Kapitel 9 Unit Tests
 
 Alignment: code structure makes unit testing easier:
 Smaller functions like scrapeSinglePage and #findNextLink can be tested independently.
 By isolating responsibilities, functions can be mocked or tested without reliance on other parts of the code.
-There are no built-in tests. Writing unit tests for each of the helper functions and the scrapeNextPage method would provide more reliability in funcitonality.
+
 
 
 ## Kapitel 10 Classes

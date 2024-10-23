@@ -3,7 +3,7 @@
 ## Description
 This project is a web scraper that allows users to input a URL and receive the scraped content. It can scrape multiple pages and extract a wide range of elements such as CSS and HTML elements.
 
-## Requirements
+## Dependencies
 - Node.js
 - npm
 - Express
