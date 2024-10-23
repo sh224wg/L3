@@ -19,9 +19,12 @@ app.post('/scrape', async (req, res) => {
     const { url } = req.body // get URL from form
     try {
         const data = await scraper.scrapeWebPage(url) // call scraper
+        res.json({success: true, data}) // send back in Json
+    } catch (error) {
+        res.json({sucess : false, error: error.message})
     }
 })
 
 app.listen(port, () => {
-    console.log('Server is running at http://localhost:')
+    console.log(`Server is running at https://localhost:${port}`)
 })
