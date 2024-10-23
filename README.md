@@ -4,6 +4,11 @@
 This project is a web scraper that allows users to input a URL and receive the scraped content. It can scrape multiple pages and extract a wide range of elements such as CSS and HTML elements.
 
 ## Requirements
+- Node.js
+- npm
+- Express
+
+## Requirements
 URL input
 - The user can input a URL and recieve the scraped content
 - Multiple pages can be scraped
@@ -16,4 +21,7 @@ Error Handling
 
 Results
 - Results are presented to the user 
+
+### License
+This project is licensed under the MIT License
 
