@@ -1,5 +1,5 @@
 import express from 'express'
-import scraper from './src/scraper.js'
+import scraper from './src/module/scraper.js'
 
 const app = express()
 const port = 3000
