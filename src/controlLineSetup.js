@@ -61,23 +61,4 @@ class ScraperCLI {
         console.log(`Scraped data saved to ${this.filePath}`)
     }
 }
-
-=> {
-    try {
-        if (!scraper.validateUrl(url)) {
-            console.log('Invalid URL')
-            process.exit(1)
-        }
-
-        const result = await scraper.scrapeWebPage(url)
-        const jsonContent = JSON.stringify(result, null, 2)
-
-        // console.log('Scraped data:', jsonContent);
-
-        fs.writeFileSync(filePath, jsonContent)
-        console.log(`Scraped data saved to ${filePath}`)
-    } catch (error) {
-        console.error(`Error: ${error.message}`)
-        process.exit(1)
-    }
-})
+export default ScraperCLI
