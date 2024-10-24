@@ -10,7 +10,6 @@ This project is a Control Line Interface web scraper app that allows users to in
 ## Requirements
 URL input
 - The user can input a URL and recieve the scraped content
-- Multiple pages can be scraped
 
 Elements
 - The Scraper extracts a wide range of elements such as CSS and HTML elements

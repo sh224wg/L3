@@ -299,7 +299,7 @@ class WebScraper {
         cellElements.forEach((cellElement) => {
             cells.push(cellElement.textContent.trim())
         })
-        return cells//rows.push(cells)
+        return cells
     }
     /**
      * Retry scraping a URL a specified number of times.
