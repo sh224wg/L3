@@ -1,7 +1,7 @@
 {
   "name": "l3",
   "version": "1.0.0",
-  "description": "scraper app",
+  "description": "CLI scraper app",
   "main": "index.js",
   "type": "module",
   "scripts": {

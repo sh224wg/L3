@@ -11,7 +11,7 @@ class ScraperCLI {
         this.scraper = new WebScraper()
         this.url = process.argv[2]
         this.desktopPath = path.join(os.homedir(), 'Desktop')
-        this.fileName = `scraped-content-${Date.now()}.json`
+        this.fileName = `scraped-content-${Date.now()}.txt`
         this.filePath = path.join(this.desktopPath, this.fileName)
     }
 
@@ -20,7 +20,7 @@ class ScraperCLI {
         try {
             this.validateInput()
             const result = await this.scraper.scrapeWebPage(this.url)
-            this.saveResultToFile(result)
+            this.saveToFile(result)
         } catch (error) {
             console.error(`Error: ${error.message}`)
             process.exit(1)
@@ -45,17 +45,20 @@ class ScraperCLI {
      * 
      * @param {*} result 
      */
-    displayResult(result) {
-        const jsonContent = JSON.stringify(result, null, 2)
-        console.log('Scraped data:', jsonContent)
-    }
+    formatResult(result) {
 
+    }
+    
     /**
      * 
      */
-    saveToFile() {
+    saveToFile(result) {
         try {
-            fs.writeFileSync(this.filePath, JSON.stringify(result, null, 2))
+            if (!fs.existsSync(this.desktopPath)) {
+                fs.mkdirSync(this.desktopPath, { recursive: true })
+            }
+            const formatContent = this.formatResult(result)
+            fs.writeFileSync(this.filePath, formatContent)
             console.log(`Scraped data saved to ${this.filePath}`)
         } catch (error) {
             console.error(`Failed to save result to file. Error${error.message}`)
