@@ -44,6 +44,12 @@ class WebScraper {
         return userAgents[Math.floor(Math.random() * userAgents.length)]
     }
 
+    /**
+     * Builds header options for a request, including a random User-Agent if not provided.
+     * @param {Object} options - The options object containing optional headers.
+     * @param {Object} [options.headers] - Optional headers for the request.
+     * @returns {Object} An object containing the headers for the request.
+     */
     buildHeaderOptions(options) {
         return {
             headers: options.headers || {
@@ -52,6 +58,11 @@ class WebScraper {
         }
     }
 
+    /**
+     * Extracts various types of data from a DOM document.
+     * @param {Document} document - The DOM document to extract data from.
+     * @returns {Object} An object containing the extracted data, including text, metaData, titles, paragraphs, lists, images, links, spans, and tables.
+     */
     extractDataFromDom(document) {
         return {
             text: document.body.textContent ? document.body.textContent.trim() : '',
@@ -180,6 +191,11 @@ class WebScraper {
         return lists
     }
 
+    /**
+     * Extracts text content from list items in an unordered list (ul) element.
+     * @param {Element} ul - The unordered list (ul) element to extract items from.
+     * @returns {Array<string>} An array of text content from the list items.
+     */
     extractListItems(ul) {
         const items = []
         const liElements = ul.querySelectorAll('li')
@@ -209,6 +225,11 @@ class WebScraper {
         return images
     }
 
+    /**
+     * Creates an image data object from an image element.
+     * @param {Element} img - The image element to extract data from.
+     * @returns {Object|null} An object containing the image data or null if the src attribute is missing.
+     */
     createImageData(img) {
         const src = img.getAttribute('src')
         const alt = img.getAttribute('alt') || ''
@@ -283,6 +304,11 @@ class WebScraper {
         return tables
     }
 
+    /**
+     * Extracts rows from a table element.
+     * @param {Element} tableElement - The table element to extract rows from.
+     * @returns {Array<Array<string>>} An array of rows, where each row is an array of cell text content.
+     */
     extractTableRows(tableElement) {
         const rows = []
         const rowElements = tableElement.querySelectorAll('tr')
@@ -294,6 +320,11 @@ class WebScraper {
         return rows
     }
 
+    /**
+     * Extracts cells from a row element.
+     * @param {Element} rowElement - The row element to extract cells from.
+     * @returns {Array<string>} An array of cell text content.
+     */
     extractTableCells(rowElement) {
         const cells = []
         const cellElements = rowElement.querySelectorAll('td, th')
@@ -302,6 +333,7 @@ class WebScraper {
         })
         return cells
     }
+
     /**
      * Retry scraping a URL a specified number of times.
      * @param {string} url - The URL to scrape.
@@ -334,7 +366,6 @@ class WebScraper {
     async scrapeNextPage(url, maxPages = 5) {
         let currentUrl = url
         let scrapedContent = []
-
         for (let i = 1; i <= maxPages; i++) {
             console.log(`Scraping page ${i}: ${currentUrl}`)
             const pageContent = await this.scrapeWebPage(currentUrl)
@@ -358,18 +389,25 @@ class WebScraper {
         return scrapedContent
     }
 
-    async scrapeAndFindNextPage() {
-        const nextPageUrl = this.#findNextPage(new JSDOM(pageContent.text).window.document)
-        if (!nextPageUrl) {
-            console.log(`No next page found after page ${i}. Scraping ended.`)
-            break
-        }
-        const shouldScrapeNext = await this.promptForNextPage(i + 1)
-        if (!shouldScrapeNext) {
-            console.log(`User chose not to scrape page ${i + 1}. Scraping ended.`)
-            break
+    /**
+     * Scrape a page and find the next page URL.
+     * @param {string} url - The URL to scrape.
+     * @param {number} pageNumber - The current page number.
+     * @returns {Promise<{pageContent: Object|null, nextPageUrl: string|null}>} The scraped content and the next page URL.
+     */
+    async scrapeAndFindNextPage(url, pageNumber) {
+        try {
+            const pageContent = await this.scrapeWebPage(url)
+            if (!pageContent) return { pageContent: null, nextPageUrl: null }
+            const document = new JSDOM(pageContent.text).window.document
+            const nextPageUrl = this.#findNextPage(document)
+            return { pageContent, nextPageUrl }
+        } catch (error) {
+            console.log(`Error scraping page ${pageNumber}:`, error)
+            return { pageContent: null, nextPageUrl: null }
         }
     }
+
     /**
      * Prompt the user to ask if they want to scrape the next page.
      * @param {number} pageNumber - The number of the next page.
@@ -397,7 +435,6 @@ class WebScraper {
         if (nextLinkOrButton) {
             return nextLinkOrButton.href
         }
-
         const nextPaginationLink = this.#findNextPaginationLink(document)
         if (nextPaginationLink) {
             return nextPaginationLink.href

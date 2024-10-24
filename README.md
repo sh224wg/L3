@@ -1,7 +1,7 @@
 # Web Scraper
 
 ## Description
-This project is a Control Line Interface web scraper app that allows users to input a URL and receive the scraped content as a file but also in the controle line interface. It can scrape multiple pages and extract a wide range of elements such as CSS and HTML elements.
+This project is a Control Line Interface web scraper app that allows users to input a URL and receive the scraped content as a file. It can scrape multiple pages and extract a wide range of elements such as CSS and HTML elements.
 
 ## Dependencies
 - Node.js
@@ -18,7 +18,7 @@ Error Handling
 - The scraper should log erros and have error handling to deal with exceptions.
 
 Results
-- Results are presented to the user as a file but also in the CLI 
+- Results are presented to the user as a file.
 
 ### License
 This project is licensed under the MIT License
