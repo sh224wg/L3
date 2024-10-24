@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import { JSDOM } from 'jsdom'
+import readline from 'readline'
 
 const ERROR_MESSAGES = {
     INVALID_URL: 'Invalid URL',
@@ -337,12 +338,18 @@ class WebScraper {
         for (let i = 1; i <= maxPages; i++) {
             console.log(`Scraping page ${i}: ${currentUrl}`)
             const pageContent = await this.scrapeWebPage(currentUrl)
-            if (!pageContent) { console.log(`No content found on page ${page}. Scraping ended.`)
+            if (!pageContent) {
+                console.log(`No content found on page ${page}. Scraping ended.`)
                 break
             }
             scrapedContent.push(pageContent)
-            const nextPageUrl = this.#findNextPage(new JSDOM(pageContent.text).window.document)
-            if (!nextPageUrl) { console.log(`No next page found after page ${i}. Scraping ended.`)
+            if (!nextPageUrl) {
+                console.log(`No next page found after page ${pageNumber}. Scraping ended.`)
+                break
+            }
+            const shouldContinue = await this.promptForNextPage(pageNumber + 1)
+            if (!shouldContinue) {
+                console.log(`User chose not to scrape page ${pageNumber + 1}. Scraping ended.`)
                 break
             }
             currentUrl = new URL(nextPageUrl, currentUrl).href
@@ -351,6 +358,33 @@ class WebScraper {
         return scrapedContent
     }
 
+    async scrapeAndFindNextPage() {
+        const nextPageUrl = this.#findNextPage(new JSDOM(pageContent.text).window.document)
+        if (!nextPageUrl) {
+            console.log(`No next page found after page ${i}. Scraping ended.`)
+            break
+        }
+        const shouldScrapeNext = await this.promptForNextPage(i + 1)
+        if (!shouldScrapeNext) {
+            console.log(`User chose not to scrape page ${i + 1}. Scraping ended.`)
+            break
+        }
+    }
+    /**
+     * Prompt the user to ask if they want to scrape the next page.
+     * @param {number} pageNumber - The number of the next page.
+     * @returns {Promise<boolean>} True if the user wants to scrape the next page, false otherwise.
+     */
+    async promptForNextPage(pageNumber) {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        })
+        const question = (query) => new Promise((resolve) => rl.question(query, resolve))
+        const answer = await question(`Next page found. Do you want to scrape page ${pageNumber}? (yes/no): `)
+        rl.close();
+        return answer.toLowerCase() === 'yes'
+    }
 
     /**
      * Find the next page link or button in the content.
@@ -388,20 +422,20 @@ class WebScraper {
      * @param {Element} element - The DOM element to check.
      * @returns {boolean} True if the element is a "next" link or button, otherwise false.
      */
-    #isNextLinkOrButton(element){
+    #isNextLinkOrButton(element) {
         const text = element.textContent?.toLowerCase() || '';
         return (
             text.includes('next') || text.includes('>') || text.includes('»') ||
             (element.title?.toLowerCase().includes('next')) || (element.getAttribute('aria-label')?.toLowerCase() === 'next')
         )
     }
-    
+
     /**
      * Find the next pagination link or button in the content.
      * @param {Document} document - The DOM document.
      * @returns {Element|null} The next pagination link or button, null if not found.
      */
-    #findNextPaginationLink(document){
+    #findNextPaginationLink(document) {
         const paginationContainer = document.querySelector('.pagination, .pagination-container')
         if (!paginationContainer) return null
 
