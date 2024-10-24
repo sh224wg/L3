@@ -10,6 +10,7 @@
   "author": "Saskia Heinemann",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "standard": "^17.1.2"
   }
 }

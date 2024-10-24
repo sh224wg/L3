@@ -8,6 +8,8 @@ Simpler Flow: Use concise and meaningful condition checks.
 
 didnt change too much as i felt that it would make it less logical and add multiple arguemnts which i wanted to avoid
 
+changed find next link to smaller anad devloped it more so it now functions. However, due ot variety in next page buttons and html structure differing on various websites, its difficult to find the next page as it is often hidden in divs, in classes, and lists. This is unfortunate but i am happy that it is now more integrated and works. THe universality of navigation is perhaps too much to conquer for now.
+
 ## Kapitel 2
 - getmetadata changed to extract meta data
 
