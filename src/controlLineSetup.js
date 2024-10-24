@@ -37,7 +37,7 @@ class ScraperCLI {
             process.exit(1)
         }
         if (!this.scraper.validateUrl(this.url)) {
-            console.error('Invalid Url')
+            console.error('Invalid Url, Please enter valid URL')
             process.exit(1)
         }
     }
