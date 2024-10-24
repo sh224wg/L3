@@ -1,5 +1,10 @@
 import ScraperCLI from './src/controlLineSetup.js'
 
+/**
+ * Manual test script for ScraperCLI.
+ * This script tests the formatResult method of ScraperCLI.
+ */
+
 const scraperCLI = new ScraperCLI()
 
 const result = {
