@@ -8,6 +8,9 @@
     "start": "start",
     "test": "jest"
   },
+  "bin": {
+    "scrape":"./index.js"
+  },
   "author": "Saskia Heinemann",
   "license": "MIT",
   "dependencies": {
