@@ -6,3 +6,9 @@ import fs from 'fs'
 import path from 'path'
 import os from 'os'
 
+const scraper = new WebScraper()
+const url = process.argv[2] // url from command line
+
+if(!url) {
+    console.log('Please enter a URL to scrape.')
+}
