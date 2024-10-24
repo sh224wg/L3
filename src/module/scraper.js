@@ -11,10 +11,10 @@ const ERROR_MESSAGES = {
  * Class representing a web scraper.
  */
 class WebScraper {
-    
     constructor() {
         this.scrapedData = null
     }
+
 
     /**
      * Validate if a given URL is valid.
@@ -271,7 +271,7 @@ class WebScraper {
         const tableElements = document.querySelectorAll('table')
 
         tableElements.forEach((tableElement) => {
-            const rows = extractTableRows(tableElement)
+            const rows = this.extractTableRows(tableElement)
             const tableHTML = tableElement.outerHTML.trim()
 
             if (rows.length > 0 && !uniqueTables.has(tableHTML)) {
@@ -299,7 +299,7 @@ class WebScraper {
         cellElements.forEach((cellElement) => {
             cells.push(cellElement.textContent.trim())
         })
-        rows.push(cells)
+        return cells//rows.push(cells)
     }
     /**
      * Retry scraping a URL a specified number of times.
@@ -334,19 +334,20 @@ class WebScraper {
         let currentUrl = url
         let scrapedContent = []
 
-        for (let i = 1; i <= maxPages; i++) { console.log(`Scraping page ${i}: ${currentUrl}`)
+        for (let i = 1; i <= maxPages; i++) {
+            console.log(`Scraping page ${i}: ${currentUrl}`)
             const pageContent = await this.scrapeWebPage(currentUrl)
-            if (!pageContent) {
-                console.log(`No content found on page ${page}. Scraping ended.`)
+            if (!pageContent) { console.log(`No content found on page ${page}. Scraping ended.`)
                 break
             }
             scrapedContent.push(pageContent)
-            const nextPageUrl = this.#findNextPage(pageContent)
-            if (!nextLink) { console.log(`No next page found after page ${page}. Scraping ended.`)
+            const nextPageUrl = this.#findNextPage(new JSDOM(pageContent.text).window.document)
+            if (!nextPageUrl) { console.log(`No next page found after page ${i}. Scraping ended.`)
                 break
             }
-            currentUrl = nextPageUrl
+            currentUrl = new URL(nextPageUrl, currentUrl).href
         }
+        console.log(`Total pages scraped: ${scrapedContent.length}`)
         return scrapedContent
     }
 
@@ -356,20 +357,55 @@ class WebScraper {
      * @param {Document} document - The Dom document.
      * @returns {string|null} The URL of the next page or null if not found.
      */
+
     #findNextPage(document) {
-        let nextLink = document.links.find(link =>
-            (link.text && (link.text.toLowerCase().includes('next') || link.text.includes('>'))) ||
-            (link.title && link.title.toLowerCase() === 'nästa sida') ||
-            (link.dataset && link.dataset.elid === 'pagination-next-page-button')
-        )
-        if (nextLink && nextLink.href) {
-            return nextLink.href
+        const nextLinkOrButton = this.#findNextLinkOrButton(document)
+        if (nextLinkOrButton) {
+            return nextLinkOrButton.href
         }
-        const nextButton = content.buttons.find(button => button.dataset && button.dataset.elid === 'pagination-next-page-button')
-        if (nextButton && nextButton.href) {
-            return nextButton.href
+
+        const nextPaginationLink = this.#findNextPaginationLink(document)
+        if (nextPaginationLink) {
+            return nextPaginationLink.href
         }
         return null
+    }
+
+    /**
+    * Find the next link or button that represents a "next" action.
+    * @param {Document} document - The DOM document.
+    * @returns {Element|null} The next link or button element or null.
+    */
+    #findNextLinkOrButton(document) {
+        const potentialNextElements = [
+            ...document.querySelectorAll('a, button')
+        ]
+        return potentialNextElements.find(element => this.#isNextLinkOrButton(element))
+    }
+
+    /**
+     * Check if an element is a "next" link or button.
+     * @param {Element} element - The DOM element to check.
+     * @returns {boolean} True if the element is a "next" link or button, otherwise false.
+     */
+    #isNextLinkOrButton(element){
+        const text = element.textContent?.toLowerCase() || '';
+        return (
+            text.includes('next') || text.includes('>') || text.includes('»') ||
+            (element.title?.toLowerCase().includes('next')) || (element.getAttribute('aria-label')?.toLowerCase() === 'next')
+        )
+    }
+    
+    /**
+     * Find the next pagination link or button in the content.
+     * @param {Document} document - The DOM document.
+     * @returns {Element|null} The next pagination link or button, null if not found.
+     */
+    #findNextPaginationLink(document){
+        const paginationContainer = document.querySelector('.pagination, .pagination-container')
+        if (!paginationContainer) return null
+
+        return paginationContainer.querySelector('a.next, button.next, a[rel="next"], button[rel="next"]') || null
     }
 }
 
