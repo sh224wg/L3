@@ -17,3 +17,13 @@ if(!url) {
 const desktopPath = path.join(os.homedir(),'Desktop') // user desktop
 const fileName = `scraped-content-${Date.now()}.json`// name for each file
 const filePath = path.join(desktopPath, fileName)
+
+//scraper
+( async () => {
+    try {
+        if(!scraper.validateUrl(url)) {
+            console.log('Invalid URL')
+            process.exit(1)
+        }
+    }
+})
