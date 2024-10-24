@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import WebScraper from './module/scraper.js'
 import fs from 'fs'
 import path from 'path'
