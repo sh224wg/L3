@@ -12,3 +12,6 @@ const url = process.argv[2] // url from command line
 if(!url) {
     console.log('Please enter a URL to scrape.')
 }
+
+// save file to user desktop
+const desktopPath = path.join(os.homedir(),'Desktop') // user desktop
