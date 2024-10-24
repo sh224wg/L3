@@ -54,4 +54,22 @@ describe('WebScraper', () => {
         expect(data.text).toBe('Test paragraph')
     })
 
+    test('scrapeAndFindNextPage should return the next page URL when a next link is present', async () => {
+        scraper.scrapeWebPage = jest.fn().mockResolvedValue({
+            text: `
+                <html>
+                    <body>
+                        <p>Test paragraph</p>
+                        <a href="/next" rel="next">Next</a>
+                    </body>
+                </html>
+            `,
+        })
+        const url = 'http://example.com'
+        const { pageContent, nextPageUrl } = await scraper.scrapeAndFindNextPage(url, 1)
+
+        expect(pageContent).not.toBeNull()
+        expect(pageContent.text).toContain('Test paragraph')
+        expect(nextPageUrl).toBe('/next')
+    })
 })

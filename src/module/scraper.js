@@ -395,7 +395,7 @@ class WebScraper {
             const pageContent = await this.scrapeWebPage(url)
             if (!pageContent) return { pageContent: null, nextPageUrl: null }
             const formattedHtml = pageContent.text.replace(/></g, '> <')
-            const document = new JSDOM(formattedHtml).window.document;
+            const document = new JSDOM(formattedHtml).window.document
             const nextPageUrl = this.#findNextPage(document)
             return { pageContent, nextPageUrl }
         } catch (error) {
