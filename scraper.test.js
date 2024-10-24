@@ -1,4 +1,5 @@
 import WebScraper from './src/module/scraper.js'
+import { JSDOM } from 'jsdom'
 
 jest.mock('node-fetch', () => {
     return {
@@ -20,5 +21,22 @@ describe('WebScraper', () => {
 
     test('validateUrl should return false for invalid URLs', () => {
         expect(scraper.validateUrl('invalid-url')).toBe(false)
+    })
+
+    test('selectRandomUserAgent should return a non-empty string', () => {
+        const userAgent = scraper.selectRandomUserAgent()
+        expect(typeof userAgent).toBe('string')
+        expect(userAgent.length).toBeGreaterThan(0)
+    })
+
+    test('buildHeaderOptions should include a User-Agent header', () => {
+        const headers = scraper.buildHeaderOptions({})
+        expect(headers.headers['User-Agent']).toBeDefined()
+    })
+
+    test('extractDataFromDom should extract text content from a DOM document', () => {
+        const dom = new JSDOM('<html><body><p>Test paragraph</p></body></html>')
+        const data = scraper.extractDataFromDom(dom.window.document)
+        expect(data.text).toBe('Test paragraph')
     })
 })
