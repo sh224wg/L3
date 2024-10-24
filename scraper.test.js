@@ -1,5 +1,6 @@
 import WebScraper from './src/module/scraper.js'
 import { JSDOM } from 'jsdom'
+import fetch from 'node-fetch'
 
 jest.mock('node-fetch', () => {
     return {
@@ -37,6 +38,19 @@ describe('WebScraper', () => {
     test('extractDataFromDom should extract text content from a DOM document', () => {
         const dom = new JSDOM('<html><body><p>Test paragraph</p></body></html>')
         const data = scraper.extractDataFromDom(dom.window.document)
+        expect(data.text).toBe('Test paragraph')
+    })
+
+    test('scrapeWebPage should return scraped content', async () => {
+        const url = 'https://example.edu'
+        const mockResponse = '<html><body><p>Test paragraph</p></body></html>'
+        fetch.mockImplementation(() =>
+            Promise.resolve({
+                ok: true,
+                text: () => Promise.resolve(mockResponse),
+            })
+        )
+        const data = await scraper.scrapeWebPage(url)
         expect(data.text).toBe('Test paragraph')
     })
 })

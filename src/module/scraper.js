@@ -16,7 +16,6 @@ class WebScraper {
         this.scrapedData = null
     }
 
-
     /**
      * Validate if a given URL is valid.
      * @param {string} url - The URL to validate.
@@ -475,5 +474,4 @@ class WebScraper {
         return paginationContainer.querySelector('a.next, button.next, a[rel="next"], button[rel="next"]') || null
     }
 }
-
 export default WebScraper
