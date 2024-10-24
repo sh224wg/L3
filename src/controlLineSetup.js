@@ -15,3 +15,5 @@ if(!url) {
 
 // save file to user desktop
 const desktopPath = path.join(os.homedir(),'Desktop') // user desktop
+const fileName = `scraped-content-${Date.now()}.json`// name for each file
+const filePath = path.join(desktopPath, fileName)
