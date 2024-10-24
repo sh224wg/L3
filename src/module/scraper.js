@@ -366,21 +366,17 @@ class WebScraper {
     async scrapeNextPage(url, maxPages = 5) {
         let currentUrl = url
         let scrapedContent = []
-        for (let i = 1; i <= maxPages; i++) {
-            console.log(`Scraping page ${i}: ${currentUrl}`)
-            const pageContent = await this.scrapeWebPage(currentUrl)
-            if (!pageContent) {
-                console.log(`No content found on page ${page}. Scraping ended.`)
+        for (let pageNumber = 1; pageNumber <= maxPages; pageNumber++) { console.log(`Scraping page ${pageNumber}: ${currentUrl}`)
+            const { pageContent, nextPageUrl } = await this.scrapeAndFindNextPage(currentUrl, pageNumber)
+            if (!pageContent) { console.log(`No content found on page ${pageNumber}. Scraping ended.`)
                 break
             }
             scrapedContent.push(pageContent)
-            if (!nextPageUrl) {
-                console.log(`No next page found after page ${pageNumber}. Scraping ended.`)
+            if (!nextPageUrl) { console.log(`No next page found after page ${pageNumber}. Scraping ended.`)
                 break
             }
             const shouldContinue = await this.promptForNextPage(pageNumber + 1)
-            if (!shouldContinue) {
-                console.log(`User chose not to scrape page ${pageNumber + 1}. Scraping ended.`)
+            if (!shouldContinue) { console.log(`User chose not to scrape page ${pageNumber + 1}. Scraping ended.`)
                 break
             }
             currentUrl = new URL(nextPageUrl, currentUrl).href
