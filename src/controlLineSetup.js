@@ -43,6 +43,19 @@ class ScraperCLI {
 
 }
 
+
+validateInput(){
+
+}
+
+displayResult() {
+
+}
+
+saveToFile(){
+
+}
+
 => {
     try {
         if (!scraper.validateUrl(url)) {
