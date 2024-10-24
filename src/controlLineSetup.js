@@ -29,7 +29,15 @@ class ScraperCLI {
     //scraper
     async run() {
         try {
-            
+            this.validateInput()
+            const result = await this.scraper.scrapeWebPage(this.url)
+            this.displayResult(result)
+            if (this.shouldSaveToFile) {
+                this.saveResultToFile(result)
+            }
+        } catch (error) {
+            console.error(`Error: ${error.message}`)
+            process.exit(1)
         }
     }
 
