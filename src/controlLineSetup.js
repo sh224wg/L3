@@ -19,7 +19,8 @@ class ScraperCLI {
     async run() {
         try {
             this.validateInput()
-            const result = await this.scraper.scrapeWebPage(this.url)
+            await this.scraper.scrapeWebPage(this.url)
+            const result = this.scraper.getScrapedData()
             this.saveToFile(result)
         } catch (error) {
             console.error(`Error: ${error.message}`)
@@ -47,10 +48,18 @@ class ScraperCLI {
      */
     formatResult(result) {
         let content = 'Scraped Data:\n\n'
-        for (const [key, value] of Object.entries(result)) {
-            content += ``
+        for (const [key, value] of Object.entries(result)) { // iterate over object key value pairs
+            content += `${key.toUpperCase()}:\n` // key to upper case
+            if(Array.isArray(value)) { // if value is array join elements into string otherwise add to content
+                content += value.map(item => typeof item === 'object' ? JSON.stringify(item, null, 2) : item).join('\n') + '\n' 
+            } else if(typeof value === 'object') {
+                content += JSON.stringify(value, null, 2) + '\n'
+            } else {
+                content += value + '\n'
+            }
+            content += '\n'
         }
-
+        return content
     }
 
     /**
