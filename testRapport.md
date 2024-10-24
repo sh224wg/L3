@@ -16,7 +16,6 @@
 |        | correctly                        |       |
 |--------|----------------------------------|-------|
 | Test 4 | CLI runs scraper and saves ouput | Pass  |
-|--------|----------------------------------|-------|
 
 ### Test Case 1: Validate Input URL
 Description: Ensure that the CLI validates the input URL correctly.

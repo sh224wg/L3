@@ -444,9 +444,7 @@ class WebScraper {
     * @returns {Element|null} The next link or button element or null.
     */
     #findNextLinkOrButton(document) {
-        const potentialNextElements = [
-            ...document.querySelectorAll('a, button')
-        ]
+        const potentialNextElements = Array.from(document.querySelectorAll('a, button'))
         return potentialNextElements.find(element => this.#isNextLinkOrButton(element))
     }
 
@@ -471,7 +469,6 @@ class WebScraper {
     #findNextPaginationLink(document) {
         const paginationContainer = document.querySelector('.pagination, .pagination-container, ul.pagination, nav.pagination')
         if (!paginationContainer) return null
-
         return paginationContainer.querySelector('a.next, button.next, a[rel="next"], button[rel="next"], a[href*="next"], button[aria-label*="next"]') || null
     }
 }
