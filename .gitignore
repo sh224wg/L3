@@ -36,3 +36,12 @@ jspm_packages/
 
 # Operating system files
 Thumbs.db
+
+# Ignore Jest coverage directory
+coverage/
+
+# Ignore Jest cache directory
+jest-cache/
+
+# Ignore the output data
+scrapedContent.json
