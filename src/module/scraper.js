@@ -11,10 +11,10 @@ const ERROR_MESSAGES = {
  * Class representing a web scraper.
  */
 class WebScraper {
+    
     constructor() {
         this.scrapedData = null
     }
-
 
     /**
      * Validate if a given URL is valid.
