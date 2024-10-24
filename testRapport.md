@@ -26,7 +26,7 @@ Expected Result: The CLI should display an error message: "Invalid URL."
 Description: Ensure that the CLI formats the scraped result correctly.
 Steps:
 1. Create an mock output from scraped content. (see manualTest.js)
-2. Call the formatResult method with the sample result.
+2. Call the formatResult method with the sample result. (node manualTest.js)
 3. Observe the formatted output.
 Expected Result: The formatted output should contain the keys in uppercase and the values properly formatted.
 ![Test](/img/test3.png)

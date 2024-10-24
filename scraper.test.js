@@ -17,4 +17,8 @@ describe('WebScraper', () => {
     test('validateUrl should return true for valid URLs', () => {
         expect(scraper.validateUrl('https://example.edu')).toBe(true)
     })
+
+    test('validateUrl should return false for invalid URLs', () => {
+        expect(scraper.validateUrl('invalid-url')).toBe(false)
+    })
 })
