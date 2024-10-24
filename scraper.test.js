@@ -53,4 +53,5 @@ describe('WebScraper', () => {
         const data = await scraper.scrapeWebPage(url)
         expect(data.text).toBe('Test paragraph')
     })
+
 })

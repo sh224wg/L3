@@ -394,7 +394,8 @@ class WebScraper {
         try {
             const pageContent = await this.scrapeWebPage(url)
             if (!pageContent) return { pageContent: null, nextPageUrl: null }
-            const document = new JSDOM(pageContent.text).window.document
+            const formattedHtml = pageContent.text.replace(/></g, '> <')
+            const document = new JSDOM(formattedHtml).window.document;
             const nextPageUrl = this.#findNextPage(document)
             return { pageContent, nextPageUrl }
         } catch (error) {
@@ -415,7 +416,7 @@ class WebScraper {
         })
         const question = (query) => new Promise((resolve) => rl.question(query, resolve))
         const answer = await question(`Next page found. Do you want to scrape page ${pageNumber}? (yes/no): `)
-        rl.close();
+        rl.close()
         return answer.toLowerCase() === 'yes'
     }
 
@@ -428,11 +429,11 @@ class WebScraper {
     #findNextPage(document) {
         const nextLinkOrButton = this.#findNextLinkOrButton(document)
         if (nextLinkOrButton) {
-            return nextLinkOrButton.href
+            return nextLinkOrButton.getAttribute('href')
         }
         const nextPaginationLink = this.#findNextPaginationLink(document)
         if (nextPaginationLink) {
-            return nextPaginationLink.href
+            return nextPaginationLink.getAttribute('href')
         }
         return null
     }
@@ -455,7 +456,7 @@ class WebScraper {
      * @returns {boolean} True if the element is a "next" link or button, otherwise false.
      */
     #isNextLinkOrButton(element) {
-        const text = element.textContent?.toLowerCase() || '';
+        const text = element.textContent?.toLowerCase() || ''
         return (
             text.includes('next') || text.includes('>') || text.includes('»') ||
             (element.title?.toLowerCase().includes('next')) || (element.getAttribute('aria-label')?.toLowerCase() === 'next')
@@ -468,10 +469,10 @@ class WebScraper {
      * @returns {Element|null} The next pagination link or button, null if not found.
      */
     #findNextPaginationLink(document) {
-        const paginationContainer = document.querySelector('.pagination, .pagination-container')
+        const paginationContainer = document.querySelector('.pagination, .pagination-container, ul.pagination, nav.pagination')
         if (!paginationContainer) return null
 
-        return paginationContainer.querySelector('a.next, button.next, a[rel="next"], button[rel="next"]') || null
+        return paginationContainer.querySelector('a.next, button.next, a[rel="next"], button[rel="next"], a[href*="next"], button[aria-label*="next"]') || null
     }
 }
 export default WebScraper

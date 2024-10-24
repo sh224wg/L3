@@ -71,8 +71,8 @@ class ScraperCLI {
                 fs.mkdirSync(this.desktopPath, { recursive: true })
             }
             const formatContent = this.formatResult(result)
+            console.log('Formatted Content:', formatContent); // Debugging line
             fs.writeFileSync(this.filePath, formatContent)
-            console.log(`Scraped data saved to ${this.filePath}`)
         } catch (error) {
             console.error(`Failed to save result to file. Error${error.message}`)
         }
