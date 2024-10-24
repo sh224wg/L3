@@ -46,9 +46,13 @@ class ScraperCLI {
      * @param {*} result 
      */
     formatResult(result) {
+        let content = 'Scraped Data:\n\n'
+        for (const [key, value] of Object.entries(result)) {
+            content += ``
+        }
 
     }
-    
+
     /**
      * 
      */
