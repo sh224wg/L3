@@ -15,26 +15,13 @@ This chapter talks alot about how code should be self explanatory so that commen
 I think i had a good structure and format in L2 as the code follows a linear narrative, but because there are so many more functions in L3 it became more important to focus on the format. I focused on having methods that fit together close together. For example, extractTables is responsible for locating and filtering tables, extractTableRow pulls out the rows, and extractTableCell handles individual cells. This flow makes it easier to understand how everything fits together. Nesting was one of my biggest problems and in L2 there were a lot of if-statements and loops inside one another, which made it hard to follow the logic. In L3 i reduced indentation and made it more readable.
 
 ## Kapitel 6  Objects and Data Structures
+In this chapter i focused on how i structured and managed data which is a large part of this project. By returning objects between helper functions i could keep better track of the data and it was easier to modify. Using objects to pass multiple arguments into scrapeNextPage also aligned with the Law of Demeter beacuse i could keep the data encapsulated and reduce dependencies between different parts of the code.
 
-- extract images Structuring the return of createImageData as an object keeps the data organized, making it easier to modify or extend later.
+## Kapitel 7 Error Handling
+I worked on developing my error handling in L3 more than in L2. I moved my error handling for scrapeWebPage into constants outside the class to keep error logic seperate from the main functionality and focused on logging. This way simliar error handling can be used throughout the class. I also used try catch block from L2 to manage errors as this was the part of my code most likley to throw errors.
 
-Alignment: The use of an object to pass multiple arguments into scrapeSinglePage keeps related data together, which is a key principle.
-The code uses objects effectively but always good to ensure that the data structures chosen (e.g., arrays for links) match the needs of the function. 
-
-## Kapitel 7
-- Error handling in scrapewebpage is extracted using const outside class
-- use try catch
-
-Alignment: The code incorporates basic error handling and user feedback through logging:
-Logs are used to indicate why the scraping stops (No content found, No next page found).
-Using a clear message when breaking out of loops helps with understanding the flow during debugging.
-
-
-## Kapitel 8
-
-Alignment: The code isolates different parts of the logic into helper functions, respecting the boundaries between various tasks:
-scrapeNextPage focuses on controlling the pagination.
-#findNextLink, extractCells and rows focus on finding specific elements.
+## Kapitel 8 Bounderies 
+I worked on bounderies within the module but also the bounderies between the console line app and the module. It was challenging to ensure that there were not dependecies between the app and the module, something that i did notice i had issue with resulting in some methods being reworked or removed. I really wanted to try and manage the dependencies by reducing coupling and make the code more flexible in case i want to use it in another project.
 
 ## Kapitel 9 Unit Tests
 

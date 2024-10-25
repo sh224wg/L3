@@ -110,7 +110,6 @@ class WebScraper {
         }
     }
 
-
     /**
      * Extract metadata from the document.
      * @param {Document} document - The DOM document.
