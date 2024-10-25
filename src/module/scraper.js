@@ -333,29 +333,6 @@ class WebScraper {
     }
 
     /**
-     * Retry scraping a URL a specified number of times.
-     * @param {string} url - The URL to scrape.
-     * @param {number} [tries=3] - The number of retry attempts.
-     * @returns {Promise<Object>} The scraped content.
-     * @throws {Error} If all retry attempts fail.
-     */
-    async retryScrape(url, tries = 3) {
-        for (let attempt = 1; attempt <= tries; attempt++) {
-            try {
-                console.log(`Attempt ${attempt} to scrape ${url}`)
-                return await this.scrapeWebPage(url)
-            } catch (error) {
-                if (attempt < tries) {
-                    console.log(`Attempt ${attempt} failed. Trying again...`)
-                } else {
-                    console.log(`All ${tries} failed.`)
-                    throw error
-                }
-            }
-        }
-    }
-
-    /**
      * Scrape multiple pages starting from a URL.
      * @param {string} url - The starting URL.
      * @param {number} [maxPages=5] - The maximum number of pages to scrape.

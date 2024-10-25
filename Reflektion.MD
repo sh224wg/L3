@@ -1,12 +1,9 @@
 Scrapenext page
-Single Responsibility (Chapter 3): Each function should do one thing. We can separate out the logic for scraping a single page and handling the process of iterating through pages.
-Meaningful Naming (Chapter 2): Use clear function and variable names.
 Error Handling (Chapter 7): Add appropriate logs to indicate why the scraping might stop.
 Simpler Flow: Use concise and meaningful condition checks.
 
 didnt change too much as i felt that it would make it less logical and add multiple arguemnts which i wanted to avoid
 
-changed find next link to smaller anad devloped it more so it now functions. However, due ot variety in next page buttons and html structure differing on various websites, its difficult to find the next page as it is often hidden in divs, in classes, and lists. This is unfortunate but i am happy that it is now more integrated and works. THe universality of navigation is perhaps too much to conquer for now.
 
 FINAL
 much better end result as its not one large confusing json file but formatted 
@@ -16,29 +13,10 @@ The project provided me alot of insight into the way that i write and develop my
 It was a very positive experience to actively learn about how to improve the way you write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
 
 ## Kapitel 2 Names
-In my reflection on L2, I realized that I overuse the word get in function names like getMetadata and getTitles for extracting DOM elements. According to Clean Code principles, using precise names is crucial, and the term get can often be misunderstood, especially since it might imply a getter method rather than an action like scraping or extracting data. As a result I renamed my functions, changing getMETHOD to extractMETHOD, resulting in names like extractMetaData and extractTitles. This change better communicates the purpose of each method, making it clear that these functions are extracting specific HTML elements from the DOM. Communicating the functions responsibility. I also renamed the main scraping method to scrapeWebPage to indicate its purpose. My main focus was on the Intention-Revealing Names aspect of the code so that functions would indicates their intention without additional explanation. It was insightful to see how simply naming could improve the readability of the code.
+In my reflection on L2, I realized that I overuse the word get in function names like getMetadata and getTitles for extracting DOM elements. According to Clean Code principles, using precise names is crucial, and the term get can often be misunderstood, especially since it might imply a getter method rather than an action like scraping or extracting data. As a result I renamed my functions, changing getMETHOD to extractMETHOD, resulting in names like extractMetaData and extractTitles. This change better communicates the purpose of each method, making it clear that these functions are extracting specific HTML elements from the DOM. Communicating the functions responsibility. I also renamed the main scraping method to scrapeWebPage to indicate its purpose. I wanted each function to do just one thing, but I ended up with functions like findAndScrapeNextPage and scrapeNextPage and the names were so similar that it got confusing. Even though they are doing different things, it felt like I might be complicating things. My main focus was on the Intention-Revealing Names aspect of the code so that functions would indicates their intention without additional explanation. It was insightful to see how simply naming could improve the readability of the code.  
 
 ## Kapitel 3 Functions
-dont repeat yourself 
-- changed getmetadata to simpler less repetitive function
-- shorter now too
-- considered turning it into smaller helper funcitons but it would have made it more confusing espcially with names 
-
-extractParagraph
-- made it shorter by variables in same line for push
-
-extractlistdetails
-- helper function for li which makes function shorter and focuses main elemnts into extractlist, because it is so long
-
-extactimages && createImageData
-- By breaking down the image extraction logic into smaller methods, each method does one thing well.
-
-Alignment: The refactoring breaks the code into smaller functions, each with a clear purpose:
-scrapeNextPage manages the loop and controls the scraping process.
-scrapeSinglePage focuses on scraping one page and finding the next page.
-#findNextLink and #findNextButton focus on locating specific elements.
-Where It Could Improve: The functions are concise, but keeping each function as small as possible while ensuring clarity is key. This has largely been achieved here.
-
+There were alot of improvements to be made based on the functions chapter that i thought would be most challenging as my functions were very long. I was able to seperate my methods into much shorter ones, using helper methods and it was interesting to see how easy it was to break them into three of four functions to align with single responsiblity as is discussed in clean code. ScrapeWebPage could be seperated into one helper function for formatting, headers, user agents and a main function which significantly reduced length as it was my longest. I also tried to break down and work on the multiple page scraping aspect and the result was many helper functions to handle specific elements, like pagination, next buttons, and links, which did make my longest functions shorter. However, due to variety in next page buttons and html structure differing on various websites, its difficult to find the next page as it is often hidden in divs, in classes, and lists. This is unfortunate but the universality of navigation is perhaps too much to conquer for now. In L2 my functions were very repetive and so i tried to follow Do Not Repeat yourself more, i feel that i acheived this as my extract methods are shorter and broken into helper functions that make things much clearer and easier to understand. Overall aligning the code with Clean code functions was difficult as i struggled to find a balance between short and understandable.
 
 ## Kapitel 4
 
