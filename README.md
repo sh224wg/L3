@@ -59,6 +59,8 @@ To run the Scraper app use the `scrape` comman in the CLI followed by the url. N
     - The application should only take 3 seconds to scrape the content and save it.
 2. Usability
     - The user is able to simply use the application by just writing scrape followed by the URL to scrape.
+3. Readability
+    - The user is informed through console log messages regarding if the webpage is scraped successfully or not.
 
 ### License
 This project is licensed under the MIT License
