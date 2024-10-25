@@ -1,4 +1,4 @@
-import WebScraper from './src/module/scraper.js'
+import WebScraper from '../src/module/scraper.js'
 import { JSDOM } from 'jsdom'
 import fetch from 'node-fetch'
 

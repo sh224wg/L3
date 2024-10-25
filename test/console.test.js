@@ -1,4 +1,4 @@
-import ScraperCLI from './src/controlLineSetup.js'
+import ScraperCLI from '../src/controlLineSetup.js'
 import fs from 'fs'
 
 jest.mock('fs')
