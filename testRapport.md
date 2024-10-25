@@ -30,23 +30,22 @@ See scraper.test.js file
 |        | next page is present             |       |
 
 
-
 ### ConsoleLineApp
+See console.test.js
+
 | Test   | Description                      | status|
 |--------|----------------------------------|-------|
-| Test 1 | URL Validation in CLI            | Pass  |
+| Test 1 |Should save scraped result to file| Pass  |
 |--------|----------------------------------|-------|
-| Test 2 | URL validation with invalid URL  | Pass  |
+| Test 2 |Should validate input URL and exit|       |
+|        |if no URL is present              | Pass  |
 |--------|----------------------------------|-------|
-| Test 3 | scraped content formatted        | Pass  |
-|        | correctly                        |       |
+| Test 3 | Should exit with error if run    | Pass  |
+|        | method fails                     |       |
 |--------|----------------------------------|-------|
-| Test 4 | CLI runs scraper and saves ouput | Pass  |
-
-
-
 
 ## Manual Test Cases
+For ConsoleLineApp
 
 | Test   | Description                      | status|
 |--------|----------------------------------|-------|
