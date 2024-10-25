@@ -1,16 +1,6 @@
-Scrapenext page
-Error Handling (Chapter 7): Add appropriate logs to indicate why the scraping might stop.
-Simpler Flow: Use concise and meaningful condition checks.
-
-didnt change too much as i felt that it would make it less logical and add multiple arguemnts which i wanted to avoid
-
-
-FINAL
-much better end result as its not one large confusing json file but formatted 
-
 # Reflection
 The project provided me alot of insight into the way that i write and develop my code. As i began comparing my code to that of the ideal version described in clean code i realised how much i lack or am less aware of. 
-It was a very positive experience to actively learn about how to improve the way we write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
+It was a very positive experience to actively learn about how to improve the way we write code, something i feel that we have not done so much of as we are mainly focusing on a solution. The end result in L3 was such an improvement because i could break the functions into smaller manageable and readable parts which also made testing easier.
 
 ## Kapitel 2 Names
 In my reflection on L2, I realized that I overuse the word get in function names like getMetadata and getTitles for extracting DOM elements. According to Clean Code principles, using precise names is crucial, and the term get can often be misunderstood, especially since it might imply a getter method rather than an action like scraping or extracting data. As a result I renamed my functions, changing getMETHOD to extractMETHOD, resulting in names like extractMetaData and extractTitles. This change better communicates the purpose of each method, making it clear that these functions are extracting specific HTML elements from the DOM. Communicating the functions responsibility. I also renamed the main scraping method to scrapeWebPage to indicate its purpose. I wanted each function to do just one thing, but I ended up with functions like findAndScrapeNextPage and scrapeNextPage and the names were so similar that it got confusing. Even though they are doing different things, it felt like I might be complicating things. My main focus was on the Intention-Revealing Names aspect of the code so that functions would indicates their intention without additional explanation. It was insightful to see how simply naming could improve the readability of the code.  
