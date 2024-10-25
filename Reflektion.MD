@@ -1,7 +1,3 @@
-# Reflection
-The project provided me alot of insight into the way that i write and develop my code. As i began comparing my code to that of the ideal version described in clean code i realised how much i lack or am less aware of. 
-It was a very positive experience to actively learn about how to improve the way you write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
-
 Scrapenext page
 Single Responsibility (Chapter 3): Each function should do one thing. We can separate out the logic for scraping a single page and handling the process of iterating through pages.
 Meaningful Naming (Chapter 2): Use clear function and variable names.
@@ -15,19 +11,12 @@ changed find next link to smaller anad devloped it more so it now functions. How
 FINAL
 much better end result as its not one large confusing json file but formatted 
 
-## Kapitel 2
-- getmetadata changed to extract meta data
+# Reflection
+The project provided me alot of insight into the way that i write and develop my code. As i began comparing my code to that of the ideal version described in clean code i realised how much i lack or am less aware of. 
+It was a very positive experience to actively learn about how to improve the way you write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
 
-- getTitles => extractTitles and helement to headerELement
-
-- get lists to extractlist
-
-Using names like extractUniqueImages and createImageData makes it clear what each function is responsible for.
-
-Alignment: The code uses clear and descriptive names for variables, functions, and parameters. For example:
-scrapedContent, maxPages, currentUrl clearly describe their purpose.
-Functions like scrapeSinglePage and findNextPage describe what they do.
-Helper functions like #findNextLink, #findNextButton, reflect their roles.
+## Kapitel 2 Names
+In my reflection on L2, I realized that I overuse the word get in function names like getMetadata and getTitles for extracting DOM elements. According to Clean Code principles, using precise names is crucial, and the term get can often be misunderstood, especially since it might imply a getter method rather than an action like scraping or extracting data. As a result I renamed my functions, changing getMETHOD to extractMETHOD, resulting in names like extractMetaData and extractTitles. This change better communicates the purpose of each method, making it clear that these functions are extracting specific HTML elements from the DOM. Communicating the functions responsibility. I also renamed the main scraping method to scrapeWebPage to indicate its purpose. My main focus was on the Intention-Revealing Names aspect of the code so that functions would indicates their intention without additional explanation. It was insightful to see how simply naming could improve the readability of the code.
 
 ## Kapitel 3 Functions
 dont repeat yourself 
