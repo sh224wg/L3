@@ -1,5 +1,43 @@
 # Test Rapport
 
+## Automatic test
+
+### Scraper 
+See scraper.test.js file
+
+| Test   | Description                      |status |
+|--------|----------------------------------|-------|
+| Test 1 | ValiduteUrl should return true   | Pass  |
+|        | for valid URL                    |       |
+|--------|----------------------------------|-------|
+| Test 2 | ValidateUrl should return false  | Pass  |
+|        | for invalid urls.                |       |
+|--------|----------------------------------|-------|
+| Test 3 | scraped content formatted        | Pass  |
+|        | correctly                        |       |
+|--------|----------------------------------|-------|
+| Test 4 | selectRandomUserAgent should     | Pass  |
+|        | return a non empty string        |       |
+|--------|----------------------------------|-------|
+| Test 5 |
+|--------|----------------------------------|-------|
+| Test 6 |
+|--------|----------------------------------|-------|
+| Test 7 |
+
+
+
+### ConsoleLineApp
+| Test   | Description                      | status|
+|--------|----------------------------------|-------|
+| Test 1 | URL Validation in CLI            | Pass  |
+|--------|----------------------------------|-------|
+| Test 2 | URL validation with invalid URL  | Pass  |
+|--------|----------------------------------|-------|
+| Test 3 | scraped content formatted        | Pass  |
+|        | correctly                        |       |
+|--------|----------------------------------|-------|
+| Test 4 | CLI runs scraper and saves ouput | Pass  |
 
 
 
