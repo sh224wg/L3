@@ -31,6 +31,7 @@ class ScraperCLI {
             await this.scraper.scrapeWebPage(this.url)
             const result = this.scraper.getScrapedData()
             this.saveToFile(result)
+            console.log('Scraping successful! The result has been saved to:', this.filePath)
         } catch (error) {
             console.error(`Error: ${error.message}`)
             process.exit(1)
