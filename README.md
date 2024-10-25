@@ -1,12 +1,20 @@
 # Web Scraper
 
 ## Description
-This project is a Control Line Interface web scraper app that allows users to input a URL and receive the scraped content as a file. It can scrape multiple pages and extract a wide range of elements such as CSS and HTML elements.
+This project is a Command Line Interface (CLI) web scraper app that allows users to input a URL and receive the scraped content as a file.
 
 ## Version
+1.0.0
 
 ## Vision
 The vision behind this project is to create an accessible means to scrape websites and save the information.
+
+## Installation
+1. Ensure that you have node.js and npm installed on your machine. 
+
+## Usage
+To run the Scraper app use the `scrape` comman in the CLI followed by the url:
+`scrape <URL>'`
 
 ## Dependencies
 - Node.js
@@ -29,7 +37,10 @@ The vision behind this project is to create an accessible means to scrape websit
     - Results are presented to the user as a file.
 
 ### Non Functional requirements
-1. 
+1. Performance
+    - The application should only take 3 seconds to scrape the content and save it.
+2. Usability
+    - The user is able to simply use the application by just writing scrape followed by the URL to scrape.
 
 ### License
 This project is licensed under the MIT License
