@@ -10,7 +10,7 @@ much better end result as its not one large confusing json file but formatted
 
 # Reflection
 The project provided me alot of insight into the way that i write and develop my code. As i began comparing my code to that of the ideal version described in clean code i realised how much i lack or am less aware of. 
-It was a very positive experience to actively learn about how to improve the way you write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
+It was a very positive experience to actively learn about how to improve the way we write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
 
 ## Kapitel 2 Names
 In my reflection on L2, I realized that I overuse the word get in function names like getMetadata and getTitles for extracting DOM elements. According to Clean Code principles, using precise names is crucial, and the term get can often be misunderstood, especially since it might imply a getter method rather than an action like scraping or extracting data. As a result I renamed my functions, changing getMETHOD to extractMETHOD, resulting in names like extractMetaData and extractTitles. This change better communicates the purpose of each method, making it clear that these functions are extracting specific HTML elements from the DOM. Communicating the functions responsibility. I also renamed the main scraping method to scrapeWebPage to indicate its purpose. I wanted each function to do just one thing, but I ended up with functions like findAndScrapeNextPage and scrapeNextPage and the names were so similar that it got confusing. Even though they are doing different things, it felt like I might be complicating things. My main focus was on the Intention-Revealing Names aspect of the code so that functions would indicates their intention without additional explanation. It was insightful to see how simply naming could improve the readability of the code.  
@@ -18,15 +18,8 @@ In my reflection on L2, I realized that I overuse the word get in function names
 ## Kapitel 3 Functions
 There were alot of improvements to be made based on the functions chapter that i thought would be most challenging as my functions were very long. I was able to seperate my methods into much shorter ones, using helper methods and it was interesting to see how easy it was to break them into three of four functions to align with single responsiblity as is discussed in clean code. ScrapeWebPage could be seperated into one helper function for formatting, headers, user agents and a main function which significantly reduced length as it was my longest. I also tried to break down and work on the multiple page scraping aspect and the result was many helper functions to handle specific elements, like pagination, next buttons, and links, which did make my longest functions shorter. However, due to variety in next page buttons and html structure differing on various websites, its difficult to find the next page as it is often hidden in divs, in classes, and lists. This is unfortunate but the universality of navigation is perhaps too much to conquer for now. In L2 my functions were very repetive and so i tried to follow Do Not Repeat yourself more, i feel that i acheived this as my extract methods are shorter and broken into helper functions that make things much clearer and easier to understand. Overall aligning the code with Clean code functions was difficult as i struggled to find a balance between short and understandable.
 
-## Kapitel 4
-
-comments 
-- workon making functions so clear that perhaps we dont need comments or docs for extract list or titles
-
-extract images && imagedata
-The functions are simple enough that they mostly self-explain their purpose, reducing the need for excessive comments.
-
-Alignment: The code doesn’t rely on comments, which is generally good as it implies that the code is self-explanatory.
+## Kapitel 4 Comments
+This chapter talks alot about how code should be self explanatory so that comments arnt as necessary. This was a key motivation in shorting my functions because they required less comments to be understood. I tied to make the function names and structure clear enough that extra explanations were not needed. For example, the extractImages and createImageData functions are simple and direct. They each have a single purpose, to focuses on pulling images and the other organizes the data. Forcing myself to write the functions in a way that communicated their logic. I think this chapter aligns well with the code because the names are very desrciptive. 
 
 ## Kapitel 5 Formatting
 tables method : 
