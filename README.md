@@ -7,7 +7,7 @@ This project is a Command Line Interface (CLI) web scraper app that allows users
 1.0.0
 
 ## Vision
-The vision behind this project is to create an accessible means to scrape websites and save the information.
+The vision behind this project is to create an accessible and efficient tool for web scraping that allows users to easily extract and save information from websites. By providing a simple CLI interface, the project aims to make web scraping accessible to both technical and non-technical users. The tool is designed to handle a wide range of HTML elements, ensuring comprehensive data extraction for various use cases such as data analysis, research, and content aggregation.
 
 ## Installation
 1. Ensure that you have node.js and npm installed on your machine. You can verify this by running:
@@ -23,7 +23,8 @@ The vision behind this project is to create an accessible means to scrape websit
     ````
      cd L3
     ````
-4. Run `npm install -g .` to install the CLI tool globally, allowing you to run the `scrape` command from anywhere on your system:
+4. Run `npm install -g .` to install the CLI tool globally, allowing you to run the `scrape` command from anywhere  
+   on your system:
     ```bash
     npm install -g .
     ```
@@ -61,6 +62,11 @@ To run the Scraper app use the `scrape` comman in the CLI followed by the url. N
     - The user is able to simply use the application by just writing scrape followed by the URL to scrape.
 3. Readability
     - The user is informed through console log messages regarding if the webpage is scraped successfully or not.
+
+### Test 
+To run tests use the following command
+npx jest
+For more information regarding tests please see the test folder.
 
 ### License
 This project is licensed under the MIT License

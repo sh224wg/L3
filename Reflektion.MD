@@ -1,4 +1,6 @@
-# Reflektion
+# Reflection
+The project provided me alot of insight into the way that i write and develop my code. As i began comparing my code to that of the ideal version described in clean code i realised how much i lack or am less aware of. 
+It was a very positive experience to actively learn about how to improve the way you write code, something i feel that we have not done so much of as we are mainly focusing on a solution. 
 
 Scrapenext page
 Single Responsibility (Chapter 3): Each function should do one thing. We can separate out the logic for scraping a single page and handling the process of iterating through pages.
