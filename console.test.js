@@ -1,5 +1,5 @@
 import ScraperCLI from './src/controlLineSetup.js'
-import fs from 'fs';
+import fs from 'fs'
 
 jest.mock('fs')
 jest.mock('./src/module/scraper.js')
@@ -36,6 +36,22 @@ describe('ScraperCLI', () => {
         scraperCLI.validateInput()
 
         expect(consoleErrorSpy).toHaveBeenCalledWith('Please enter URL to scrape.')
+        expect(exitSpy).toHaveBeenCalledWith(1)
+
+        exitSpy.mockRestore()
+        consoleErrorSpy.mockRestore()
+    })
+
+    test('should exit with an error message if run method fails', async () => {
+        scraperCLI.url = 'https://example.edu'
+        scraperCLI.validateInput = jest.fn()
+        scraperCLI.scraper.scrapeWebPage.mockRejectedValue(new Error('Scraping failed'))
+        const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => { })
+        const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { })
+
+        await scraperCLI.run()
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith('Error: Scraping failed')
         expect(exitSpy).toHaveBeenCalledWith(1)
 
         exitSpy.mockRestore()
