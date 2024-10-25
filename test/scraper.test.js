@@ -65,7 +65,7 @@ describe('WebScraper', () => {
                 </html>
             `,
         })
-        const url = 'http://example.com'
+        const url = 'http://example.edu'
         const { pageContent, nextPageUrl } = await scraper.scrapeAndFindNextPage(url, 1)
 
         expect(pageContent).not.toBeNull()

@@ -13,17 +13,21 @@ See scraper.test.js file
 | Test 2 | ValidateUrl should return false  | Pass  |
 |        | for invalid urls.                |       |
 |--------|----------------------------------|-------|
-| Test 3 | scraped content formatted        | Pass  |
-|        | correctly                        |       |
-|--------|----------------------------------|-------|
-| Test 4 | selectRandomUserAgent should     | Pass  |
+| Test 3 | selectRandomUserAgent should     | Pass  |
 |        | return a non empty string        |       |
 |--------|----------------------------------|-------|
-| Test 5 |
+| Test 4 | BuildHeaderOptions should include|Pass   |
+|        | a user-agent header              |       |
 |--------|----------------------------------|-------|
-| Test 6 |
+| Test 5 | extractDataFromDom should extract| Pass  |
+|        | text content from DOM document   |       |
 |--------|----------------------------------|-------|
-| Test 7 |
+| Test 6 | scrapeWebPage should return      | Pass  |
+|        | scraped content                  |       |
+|--------|----------------------------------|-------|
+| Test 7 | scrapeAndFindNextPage should     | Pass  |
+|        | return next page URL when link to|       |
+|        | next page is present             |       |
 
 
 
