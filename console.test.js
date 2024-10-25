@@ -1,17 +1,13 @@
 import ScraperCLI from './src/controlLineSetup.js'
-import fs from 'fs'
-import path from 'path'
-import os from 'os'
+import fs from 'fs';
 
 jest.mock('fs')
-jest.mock('./src/module/scraper.js', () => {
-    return jest.fn().mockImplementation(() => {
-        return {
-            scrapeWebPage: jest.fn(),
-            getScrapedData: jest.fn(),
-            validateUrl: jest.fn()
-        }
-    })
+jest.mock('./src/module/scraper.js')
+jest.mock('node-fetch', () => {
+    return {
+        __esModule: true,
+        default: jest.fn(),
+    }
 })
 
 describe('ScraperCLI', () => {
@@ -22,7 +18,6 @@ describe('ScraperCLI', () => {
         scraperCLI = new ScraperCLI()
     })
 
-
     test('should save scraped result to file', () => {
         const result = { key: 'value' }
         const formattedResult = 'Scraped Data:\n\nKEY:\nvalue\n\n'
@@ -31,5 +26,19 @@ describe('ScraperCLI', () => {
         scraperCLI.saveToFile(result)
 
         expect(fs.writeFileSync).toHaveBeenCalledWith(scraperCLI.filePath, formattedResult)
+    })
+
+    test('should validate input URL and exit if URL is missing', () => {
+        scraperCLI.url = null
+        const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => { })
+        const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { })
+
+        scraperCLI.validateInput()
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith('Please enter URL to scrape.')
+        expect(exitSpy).toHaveBeenCalledWith(1)
+
+        exitSpy.mockRestore()
+        consoleErrorSpy.mockRestore()
     })
 })
