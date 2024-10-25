@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import os from 'os'
 
+
 /**
  * 
  */
@@ -71,7 +72,6 @@ class ScraperCLI {
                 fs.mkdirSync(this.desktopPath, { recursive: true })
             }
             const formatContent = this.formatResult(result)
-            console.log('Formatted Content:', formatContent); // Debugging line
             fs.writeFileSync(this.filePath, formatContent)
         } catch (error) {
             console.error(`Failed to save result to file. Error${error.message}`)

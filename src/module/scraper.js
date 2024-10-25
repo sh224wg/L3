@@ -1,6 +1,5 @@
 import fetch from 'node-fetch'
 import { JSDOM } from 'jsdom'
-import readline from 'readline'
 
 const ERROR_MESSAGES = {
     INVALID_URL: 'Invalid URL',
@@ -374,10 +373,6 @@ class WebScraper {
             if (!nextPageUrl) { console.log(`No next page found after page ${pageNumber}. Scraping ended.`)
                 break
             }
-            const shouldContinue = await this.promptForNextPage(pageNumber + 1)
-            if (!shouldContinue) { console.log(`User chose not to scrape page ${pageNumber + 1}. Scraping ended.`)
-                break
-            }
             currentUrl = new URL(nextPageUrl, currentUrl).href
         }
         console.log(`Total pages scraped: ${scrapedContent.length}`)
@@ -404,21 +399,6 @@ class WebScraper {
         }
     }
 
-    /**
-     * Prompt the user to ask if they want to scrape the next page.
-     * @param {number} pageNumber - The number of the next page.
-     * @returns {Promise<boolean>} True if the user wants to scrape the next page, false otherwise.
-     */
-    async promptForNextPage(pageNumber) {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        })
-        const question = (query) => new Promise((resolve) => rl.question(query, resolve))
-        const answer = await question(`Next page found. Do you want to scrape page ${pageNumber}? (yes/no): `)
-        rl.close()
-        return answer.toLowerCase() === 'yes'
-    }
 
     /**
      * Find the next page link or button in the content.
