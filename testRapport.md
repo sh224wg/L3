@@ -1,4 +1,6 @@
 # Test Rapport
+The app was tested with both automatic and manual tests. Automatic tests written in Jest were written for both the scraper module and the console line app. In order to test the module mock HTTP-requests were created through node-fetch. While a mock fs was used to test the console line app in order to test file system operations. Please see the test folder for more information. 
+Additionally manual tests were written for the Control Line app to test formatting, output saving, and url validation. For more information regarding this please see the bottom of the rapport.
 
 ## Automatic test
 
