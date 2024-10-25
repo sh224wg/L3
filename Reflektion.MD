@@ -22,27 +22,7 @@ There were alot of improvements to be made based on the functions chapter that i
 This chapter talks alot about how code should be self explanatory so that comments arnt as necessary. This was a key motivation in shorting my functions because they required less comments to be understood. I tied to make the function names and structure clear enough that extra explanations were not needed. For example, the extractImages and createImageData functions are simple and direct. They each have a single purpose, to focuses on pulling images and the other organizes the data. Forcing myself to write the functions in a way that communicated their logic. I think this chapter aligns well with the code because the names are very desrciptive. 
 
 ## Kapitel 5 Formatting
-tables method : 
-Structure the code for better readability. in tables and images they are aligned in a narrative structure 
-
-the code as a whole follows a clear narrative to how the methods intertwine 
-
-Reduce Nesting:
-With smaller functions, the original deeply nested logic is now flattened, which makes it easier to follow.
-
-Each function has a specific responsibility:
-
-findTables handles finding and filtering tables.
-ExtractTableRow focuses on extracting rows from a given table.
-extracttablecell deals with extracting and trimming text from cells.
-
-Moved retry scraper to top so its closer to scraper because its calls scraper (dependent functions)
-
-Alignment: The code is well-organized and consistently formatted:
-Each function is separated clearly.
-Proper indentation and spacing make the code easy to read.
-Array.from() is used for better readability when working with collections.
-Where It Could Improve: The formatting is already clear and consistent, so the focus should be on maintaining
+I think i had a good structure and format in L2 as the code follows a linear narrative, but because there are so many more functions in L3 it became more important to focus on the format. I focused on having methods that fit together close together. For example, extractTables is responsible for locating and filtering tables, extractTableRow pulls out the rows, and extractTableCell handles individual cells. This flow makes it easier to understand how everything fits together. Nesting was one of my biggest problems and in L2 there were a lot of if-statements and loops inside one another, which made it hard to follow the logic. In L3 i reduced indentation and made it more readable.
 
 ## Kapitel 6  Objects and Data Structures
 
